@@ -1,0 +1,4 @@
+Django==3.2.3
+psycopg2-binary==2.8.6
+pytest-django==4.1.0
+pytest==6.2.1
