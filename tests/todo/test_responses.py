@@ -15,5 +15,7 @@ def test_add_task(client):
             'status': False,
          }
     )
-    assert response.status_code == 201
+    print('Response: ', response.json())
+    assert response.status_code == 200
+    assert response.json()['task'] == 'water the plants'
 

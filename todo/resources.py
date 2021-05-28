@@ -2,7 +2,7 @@ import json
 import django.http
 
 from django_declarative_apis import machinery
-from django_declarative_apis.machinery import filtering
+from django_declarative_apis.machinery import filtering, field
 from .models import Todo
 
 
@@ -28,6 +28,18 @@ class TodoDefinition(machinery.ResourceEndpointDefinition):
 
 
 class TodoUpdateDefinition(machinery.ResourceUpdateEndpointDefinition):
+    consumer = None
+    _consumer_type = None   # Ask about this?
+
+    # field: name --> the name on json, that will be converted to the field here.
+
+    task = field(required=True, type=str)   # What are all the fields that a field takes?
+    priority = field(required=True, type=str)
+    status = field(type=bool)
+
+    def is_authorized(self):  # Ask about this? Is it required?
+        return True
+
     @machinery.endpoint_resource(
         type=Todo,
         filter={
@@ -38,12 +50,12 @@ class TodoUpdateDefinition(machinery.ResourceUpdateEndpointDefinition):
                  },
     )
     def resource(self):
+        print("Hiiii!")
         task, created = Todo.objects.get_or_create(
-            task='',
-            priority='',
-            status='',
+            task=self.task,
+            priority=self.priority,
+            status=self.status,
         )
-
         return task
 
 
