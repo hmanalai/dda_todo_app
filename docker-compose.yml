@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  todo:
+    build: ./app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8009:8000
+    env_file:
+      - ./app/.env.dev
+    depends_on:
+      - todo-db
+  todo-db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hmanalai
+      - POSTGRES_PASSWORD=hellow
+      - POSTGRES_DB=todo_dev
+volumes:
+  postgres_data:
