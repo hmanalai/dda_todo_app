@@ -24,7 +24,6 @@ urlpatterns = [
     url(
         r"^tasks/$",
         resource_adapter(post=resources.TodoUpdateDefinition,
-                         get=resources.TodoDefinition,
                          authentication={None: (NoAuth(),)},),
     ),
 ]
