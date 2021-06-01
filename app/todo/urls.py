@@ -25,7 +25,7 @@ urlpatterns = [
                          authentication={None: (NoAuth(),)},),
     ),
     url(
-        r"^tasks/<int:id>/$",
+        r"^tasks/<id>/$",
         resource_adapter(get=resources.TodoSingleTaskDefinition,
                          authentication={None: (NoAuth(),)},),
         ),

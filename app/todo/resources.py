@@ -1,5 +1,5 @@
 from django_declarative_apis import machinery
-from django_declarative_apis.machinery import filtering, field
+from django_declarative_apis.machinery import filtering, field, url_field
 from .models import Todo
 
 
@@ -56,6 +56,7 @@ class TodoUpdateDefinition(machinery.ResourceUpdateEndpointDefinition):
 class TodoSingleTaskDefinition(machinery.ResourceEndpointDefinition):
     consumer = None
     _consumer_type = None
+    resource_id = url_field(name='id')
 
     def is_authorized(self):
         return True
@@ -67,7 +68,7 @@ class TodoSingleTaskDefinition(machinery.ResourceEndpointDefinition):
                    'priority': filtering.ALWAYS,
                    'created_date': filtering.ALWAYS,
                    'status': filtering.ALWAYS},
-        },
+            },
     )
     def resource(self):
         return Todo.objects.get(id=self.resource_id)
