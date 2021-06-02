@@ -18,13 +18,10 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-# SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = config('DEBUG', default=False, cast=bool)
-# DEBUG = int(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split(" ")
-# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default='*').split(" ")
 
 
 # Application definition
@@ -126,8 +123,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'todo.CustomUser'
-
 DECLARATIVE_ENDPOINT_RESOURCE_ADAPTER = (
     "django_declarative_apis.adapters.EndpointResource"
 )
@@ -141,3 +136,5 @@ DECLARATIVE_ENDPOINT_AUTHENTICATION_HANDLERS = [
         "django_declarative_apis.authentication.oauthlib.oauth1.TwoLeggedOauth1",
     )
 ]
+
+DECLARATIVE_ENDPOINT_DEFAULT_FILTERS = "todo.filters.TodoResponseFilter"
