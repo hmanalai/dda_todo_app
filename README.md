@@ -1,1 +1,1 @@
-### Simple Todo app developed using Django Declarative APIs (DDA)
+### Simple Todo app developed using [Django Declarative](https://github.com/salesforce/django-declarative-apis) APIs (DDA)
